@@ -1,0 +1,1295 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>Computer Vision - Bamboleo</title>
+
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/ntnuerc.css">
+
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="lib/css/zenburn.css">
+        <script src="https://daybrush.com/scenejs/release/latest/dist/scene.min.js"></script>
+		
+        <!-- Printing and PDF exports -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+        <script src="js/ntnu.js"></script>
+    </head>
+    <body>
+        <div class="reveal">
+        <div class="slides">
+            
+<section id="first" data-state="first">
+
+
+<!-- Header -->
+  
+
+<!-- Background -->
+
+
+<!-- Slide -->
+<div class="jb-slide">
+
+<div class="jb-output-code jb-render">
+
+<!-- start embedded style -->
+
+<!-- end embedded style -->
+<div class="jb-output jb-render">
+
+<h1> Computer Vision - Bamboleo</h1>
+
+   <div class="author" style="text-align:center;">
+    
+<p>
+      Jacky Baltes<br>
+      National Taiwan Normal University<br>
+      Taipei, Taiwan<br>
+      <a href="mailto:jacky.baltes@ntnu.edu.tw">jacky.baltes@ntnu.edu.tw</a><br>
+</p>
+
+   </div>
+   <div class="date">
+    15 November 2023
+   </div>
+
+</div><!-- end of jb-output jb-render -->
+</div><!-- end of jb-output-code jb-render -->
+
+
+</div>
+<!-- Footer -->
+
+<div class="jb-footer-left plain">
+    <span id="id-b7318ea4-cfe9-466c-bbd6-47302ea5a1df" ><span id="id-b7318ea4-cfe9-466c-bbd6-47302ea5a1df"><img id="img-id-b7318ea4-cfe9-466c-bbd6-47302ea5a1df"     src="assets/images/logo.png"/></span>
+</span>
+
+</div>
+<div class="jb-footer-right plain">
+    <span id="id-b9bc18ec-c164-4ef3-ab6c-3dd82d5fb206" ><span id="id-b9bc18ec-c164-4ef3-ab6c-3dd82d5fb206"><img id="img-id-b9bc18ec-c164-4ef3-ab6c-3dd82d5fb206" width="162" height="138"   src="assets/images/robbi.png"/></span>
+</span>
+
+</div>
+
+<aside class="notes">
+
+</aside>
+
+
+
+</section>
+<section id="slide_00003_frag_00001" data-state="slide_00003_frag_00001">
+
+
+<!-- Header -->
+  
+
+<!-- Background -->
+
+
+<!-- Slide -->
+<div class="jb-slide">
+
+<div class="jb-output-code jb-render">
+
+<!-- start embedded style -->
+
+<!-- end embedded style -->
+<div class="jb-output jb-render">
+
+<h1>Bamboleo</h1>
+
+<div class="jb-text">
+<p><a href="https://www.zoch-verlag.com/zoch_en/categories/skill-games/bamboleo-601120100-en.html">Bamboleo</a> is a 
+popular skill game</p>
+<p>Playing field consists of a yellow disk and several game pieces (e.g., cubes, prisms, cones)</p>
+<p>Pieces are placed on yellow disk and then the entire disk is balanced on top of a cork ball</p>
+<p>Players take pieces off the yellow disk one at a time. Loose 4 points if you topple the board</p>
+</div>
+
+</div><!-- end of jb-output jb-render -->
+</div><!-- end of jb-output-code jb-render -->
+
+
+</div>
+<!-- Footer -->
+
+<div class="jb-footer-left plain">
+    <span id="id-439b1000-e3ef-409a-9c1e-b443f995614d" ><span id="id-439b1000-e3ef-409a-9c1e-b443f995614d"><img id="img-id-439b1000-e3ef-409a-9c1e-b443f995614d"     src="assets/images/logo.png"/></span>
+</span>
+
+</div>
+<div class="jb-footer-right plain">
+    <span id="id-b9a39912-58f1-4afa-8260-ed652bd3bf2a" ><span id="id-b9a39912-58f1-4afa-8260-ed652bd3bf2a"><img id="img-id-b9a39912-58f1-4afa-8260-ed652bd3bf2a" width="162" height="138"   src="assets/images/robbi.png"/></span>
+</span>
+
+</div>
+
+<aside class="notes">
+
+</aside>
+
+
+
+</section>
+<section id="slide_00004_frag_00001" data-state="slide_00004_frag_00001">
+
+
+<!-- Header -->
+  
+
+<!-- Background -->
+
+
+<!-- Slide -->
+<div class="jb-slide">
+
+<div class="jb-output-code jb-render">
+
+<!-- start embedded style -->
+
+<!-- end embedded style -->
+<div class="jb-output jb-render">
+
+<table>
+<tbody>
+<tr>
+<td>
+<span id="id-d32fcd7d-359d-4f69-a7cd-f48ff530fafb" ><span id="id-d32fcd7d-359d-4f69-a7cd-f48ff530fafb"><img id="img-id-d32fcd7d-359d-4f69-a7cd-f48ff530fafb"     src="assets/images/b1.png"/></span>
+</span>
+
+</td>
+<td>
+<iframe width="640" height="360" src="https://www.youtube.com/embed/fmiMyxo-7ng" title="Bamboleo review - with Tom Vasel" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</td>
+</tr>
+</tbody>
+</table>
+
+</div><!-- end of jb-output jb-render -->
+</div><!-- end of jb-output-code jb-render -->
+
+
+</div>
+<!-- Footer -->
+
+<div class="jb-footer-left plain">
+    <span id="id-dda95327-8508-4da1-952f-f96a1b836e79" ><span id="id-dda95327-8508-4da1-952f-f96a1b836e79"><img id="img-id-dda95327-8508-4da1-952f-f96a1b836e79"     src="assets/images/logo.png"/></span>
+</span>
+
+</div>
+<div class="jb-footer-right plain">
+    <span id="id-ecd2121f-3de6-4b95-b841-52d141ac048f" ><span id="id-ecd2121f-3de6-4b95-b841-52d141ac048f"><img id="img-id-ecd2121f-3de6-4b95-b841-52d141ac048f" width="162" height="138"   src="assets/images/robbi.png"/></span>
+</span>
+
+</div>
+
+<aside class="notes">
+
+</aside>
+
+
+
+</section>
+<section id="slide_00005_frag_00001" data-state="slide_00005_frag_00001">
+
+
+<!-- Header -->
+  
+
+<!-- Background -->
+
+
+<!-- Slide -->
+<div class="jb-slide">
+
+<div class="jb-output-code jb-render">
+
+<!-- start embedded style -->
+
+<!-- end embedded style -->
+<div class="jb-output jb-render">
+
+<h1>Project</h1>
+
+<div class="jb-text">
+<p>Students from Ostfalia Uni. in Germany and NTNU in Taiwan will join to implement a
+Sawyer robot playing this game against humans or other robots</p>
+<p><a href="https://www.rethinkrobotics.com/sawyer/">Sawyer robot</a> is a co-bot from Rethink Robotics</p>
+<p>It features a single compliant robot arm, a camera, a face tablet, and a camera in the gripper of
+the robot
+<span id="id-ccbca1c5-deec-4186-af18-6ba3b093c700" ><span id="id-ccbca1c5-deec-4186-af18-6ba3b093c700"><img id="img-id-ccbca1c5-deec-4186-af18-6ba3b093c700"     src="assets/images/sawyer.png"/></span>
+</span>
+</p>
+</div>
+
+</div><!-- end of jb-output jb-render -->
+</div><!-- end of jb-output-code jb-render -->
+
+
+</div>
+<!-- Footer -->
+
+<div class="jb-footer-left plain">
+    <span id="id-2b23376e-9add-4c72-b9dc-72cca379998f" ><span id="id-2b23376e-9add-4c72-b9dc-72cca379998f"><img id="img-id-2b23376e-9add-4c72-b9dc-72cca379998f"     src="assets/images/logo.png"/></span>
+</span>
+
+</div>
+<div class="jb-footer-right plain">
+    <span id="id-5760800d-aaaf-4c6a-a614-a12230e8e71e" ><span id="id-5760800d-aaaf-4c6a-a614-a12230e8e71e"><img id="img-id-5760800d-aaaf-4c6a-a614-a12230e8e71e" width="162" height="138"   src="assets/images/robbi.png"/></span>
+</span>
+
+</div>
+
+<aside class="notes">
+
+</aside>
+
+
+
+</section>
+<section id="slide_00006_frag_00001" data-state="slide_00006_frag_00001">
+
+
+<!-- Header -->
+  
+
+<!-- Background -->
+
+
+<!-- Slide -->
+<div class="jb-slide">
+
+<div class="jb-output-code jb-render">
+
+<!-- start embedded style -->
+
+<!-- end embedded style -->
+<div class="jb-output jb-render">
+
+<h1>Modeling of the Game</h1>
+
+<div class="jb-text">
+<p>Develop a two dimensional model of the game</p>
+<p>Various pieces (cubes, rectangles, prisms, cylinder, cones)</p>
+</div>
+
+</div><!-- end of jb-output jb-render -->
+</div><!-- end of jb-output-code jb-render -->
+
+
+</div>
+<!-- Footer -->
+
+<div class="jb-footer-left plain">
+    <span id="id-fd3414ea-c2a1-4bc1-9fb9-28ccd0d73b5b" ><span id="id-fd3414ea-c2a1-4bc1-9fb9-28ccd0d73b5b"><img id="img-id-fd3414ea-c2a1-4bc1-9fb9-28ccd0d73b5b"     src="assets/images/logo.png"/></span>
+</span>
+
+</div>
+<div class="jb-footer-right plain">
+    <span id="id-cc25b32e-eb1c-432b-8702-721d9ffa9609" ><span id="id-cc25b32e-eb1c-432b-8702-721d9ffa9609"><img id="img-id-cc25b32e-eb1c-432b-8702-721d9ffa9609" width="162" height="138"   src="assets/images/robbi.png"/></span>
+</span>
+
+</div>
+
+<aside class="notes">
+
+</aside>
+
+
+
+</section>
+<section id="slide_00007_frag_00001" data-state="slide_00007_frag_00001">
+
+
+<!-- Header -->
+  
+
+<!-- Background -->
+
+
+<!-- Slide -->
+<div class="jb-slide">
+<div class="jb-input jb-render jb-code" style="text-align:center">
+
+<!-- start embedded style -->
+
+<!-- end embedded style -->
+<div class="jb-input-code jb-render">
+<div class="highlight" style="background: #f8f8f8; color:#101010;display=inline-block;"><pre style="line-height: 125%;"><span></span>PIECE_RECTANGLE, PIECE_CONE <span style="color: #666666">=</span> <span style="color: #008000">range</span>(<span style="color: #666666">2</span>)
+
+<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Piece</span>:
+  <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>( <span style="color: #008000">self</span>, <span style="color: #008000">type</span>, pos, weight, size<span style="color: #666666">=</span>(<span style="color: #666666">1</span>,<span style="color: #666666">1</span>,<span style="color: #666666">1</span>), color<span style="color: #666666">=</span><span style="color: #BA2121">&quot;#606060&quot;</span> ):
+    <span style="color: #008000">self</span><span style="color: #666666">.</span>pos <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array( pos )
+    <span style="color: #008000">self</span><span style="color: #666666">.</span>weight <span style="color: #666666">=</span> weight
+    <span style="color: #008000">self</span><span style="color: #666666">.</span>color <span style="color: #666666">=</span> color
+    <span style="color: #008000">self</span><span style="color: #666666">.</span>size <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array( size )
+
+  <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">draw_2d</span>( ax ):
+    <span style="color: #008000; font-weight: bold">pass</span>
+
+<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Piece_Rectangle</span>( Piece ):
+  <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>( <span style="color: #008000">self</span>, pos, weight, size, color<span style="color: #666666">=</span><span style="color: #BA2121">&quot;#3030b0&quot;</span> ):
+    <span style="color: #008000">super</span>()<span style="color: #666666">.</span><span style="color: #0000FF">__init__</span>( PIECE_RECTANGLE, pos, weight, size, color  )
+
+  <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">draw_2d</span>( <span style="color: #008000">self</span>, ax ):
+    artists <span style="color: #666666">=</span> []
+
+    x,y <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>pos[<span style="color: #666666">0</span>], <span style="color: #666666">0</span>
+    sx, sy <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>size[<span style="color: #666666">0</span>:<span style="color: #666666">2</span>]
+
+    r <span style="color: #666666">=</span> mpatches<span style="color: #666666">.</span>Rectangle( (x,<span style="color: #666666">0</span>), sx, sy, facecolor<span style="color: #666666">=</span><span style="color: #008000">self</span><span style="color: #666666">.</span>color )
+    artists<span style="color: #666666">.</span>append( r )
+    ax<span style="color: #666666">.</span>add_patch( r )
+
+    t <span style="color: #666666">=</span> ax<span style="color: #666666">.</span>text( x, y<span style="color: #666666">+0.01</span>, <span style="color: #BA2121">f&quot;</span><span style="color: #A45A77; font-weight: bold">{</span><span style="color: #008000">self</span><span style="color: #666666">.</span>weight<span style="color: #A45A77; font-weight: bold">:</span><span style="color: #BA2121">.2f</span><span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">&quot;</span>, fontsize<span style="color: #666666">=8</span>, color<span style="color: #666666">=</span><span style="color: #BA2121">&quot;#ffffff&quot;</span> )
+    artists<span style="color: #666666">.</span>append( t )
+
+    
+    <span style="color: #008000; font-weight: bold">return</span> artists
+</pre></div>
+
+</div><!-- end of jb-input-code jb-render -->
+
+</div>
+
+</div>
+<!-- Footer -->
+
+<div class="jb-footer-left plain">
+    <span id="id-88b974d7-9e6a-41e5-9475-91324c391418" ><span id="id-88b974d7-9e6a-41e5-9475-91324c391418"><img id="img-id-88b974d7-9e6a-41e5-9475-91324c391418"     src="assets/images/logo.png"/></span>
+</span>
+
+</div>
+<div class="jb-footer-right plain">
+    <span id="id-5347cf05-b239-45e1-9f1a-b28b95f21bdb" ><span id="id-5347cf05-b239-45e1-9f1a-b28b95f21bdb"><img id="img-id-5347cf05-b239-45e1-9f1a-b28b95f21bdb" width="162" height="138"   src="assets/images/robbi.png"/></span>
+</span>
+
+</div>
+
+<aside class="notes">
+
+</aside>
+
+
+
+</section>
+<section id="slide_00008_frag_00001" data-state="slide_00008_frag_00001">
+
+
+<!-- Header -->
+  
+
+<!-- Background -->
+
+
+<!-- Slide -->
+<div class="jb-slide">
+<div class="jb-input jb-render jb-code" style="text-align:center">
+
+<!-- start embedded style -->
+
+<!-- end embedded style -->
+<div class="jb-input-code jb-render">
+<div class="highlight" style="background: #f8f8f8; color:#101010;display=inline-block;"><pre style="line-height: 125%;"><span></span>fig <span style="color: #666666">=</span> plt<span style="color: #666666">.</span>figure()
+ax1 <span style="color: #666666">=</span> fig<span style="color: #666666">.</span>add_subplot( <span style="color: #666666">1</span>,<span style="color: #666666">1</span>,<span style="color: #666666">1</span> )
+ax1<span style="color: #666666">.</span>set_xlim((<span style="color: #666666">-1</span>,<span style="color: #666666">1</span>))
+ax1<span style="color: #666666">.</span>set_ylim((<span style="color: #666666">-1</span>, <span style="color: #666666">1</span>))
+
+field_size<span style="color: #666666">=1.8</span>
+pole_width, pole_height <span style="color: #666666">=</span> <span style="color: #666666">0.1</span>, <span style="color: #666666">0.3</span> 
+
+pieces <span style="color: #666666">=</span> [ Piece_Rectangle( [random<span style="color: #666666">.</span>randint(<span style="color: #666666">-9</span>,<span style="color: #666666">7</span>)<span style="color: #666666">/10</span>], random<span style="color: #666666">.</span>randint(<span style="color: #666666">5</span>, <span style="color: #666666">15</span>)<span style="color: #666666">/10</span>, [ random<span style="color: #666666">.</span>randint(<span style="color: #666666">10</span>,<span style="color: #666666">20</span>)<span style="color: #666666">/100</span>, random<span style="color: #666666">.</span>randint(<span style="color: #666666">10</span>,<span style="color: #666666">20</span>)<span style="color: #666666">/100</span> ] ) <span style="color: #008000; font-weight: bold">for</span> r <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">10</span>) ]
+
+<span style="color: #008000; font-weight: bold">for</span> p <span style="color: #AA22FF; font-weight: bold">in</span> pieces:
+  p<span style="color: #666666">.</span>draw_2d( ax1 )
+
+ax1<span style="color: #666666">.</span>plot( [<span style="color: #666666">-</span>field_size<span style="color: #666666">/2</span>, field_size<span style="color: #666666">/2</span>],[<span style="color: #666666">0</span>,<span style="color: #666666">0</span>], <span style="color: #BA2121">&#39;-&#39;</span>, color<span style="color: #666666">=</span><span style="color: #BA2121">&#39;black&#39;</span>, linewidth<span style="color: #666666">=3</span> )
+ax1<span style="color: #666666">.</span>plot( [ <span style="color: #666666">0</span>, <span style="color: #666666">-</span>pole_width, pole_width, <span style="color: #666666">0</span> ], [ <span style="color: #666666">0</span>, <span style="color: #666666">-</span>pole_height, <span style="color: #666666">-</span>pole_height, <span style="color: #666666">0</span>], <span style="color: #BA2121">&#39;-&#39;</span>, color<span style="color: #666666">=</span><span style="color: #BA2121">&#39;green&#39;</span>, linewidth<span style="color: #666666">=3</span> )
+
+f1 <span style="color: #666666">=</span> addJBFigure( <span style="color: #BA2121">&quot;f1&quot;</span>, <span style="color: #666666">0</span>, <span style="color: #666666">0</span>, fig )
+plt<span style="color: #666666">.</span>close()
+</pre></div>
+
+</div><!-- end of jb-input-code jb-render -->
+
+</div>
+
+</div>
+<!-- Footer -->
+
+<div class="jb-footer-left plain">
+    <span id="id-be5bbd02-ac21-4bb1-9bba-45d197932e05" ><span id="id-be5bbd02-ac21-4bb1-9bba-45d197932e05"><img id="img-id-be5bbd02-ac21-4bb1-9bba-45d197932e05"     src="assets/images/logo.png"/></span>
+</span>
+
+</div>
+<div class="jb-footer-right plain">
+    <span id="id-eb3e6d46-6d1b-4ebb-9f24-f925aa9b2000" ><span id="id-eb3e6d46-6d1b-4ebb-9f24-f925aa9b2000"><img id="img-id-eb3e6d46-6d1b-4ebb-9f24-f925aa9b2000" width="162" height="138"   src="assets/images/robbi.png"/></span>
+</span>
+
+</div>
+
+<aside class="notes">
+
+</aside>
+
+
+
+</section>
+<section id="slide_00009_frag_00001" data-state="slide_00009_frag_00001">
+
+
+<!-- Header -->
+  
+
+<!-- Background -->
+
+
+<!-- Slide -->
+<div class="jb-slide">
+
+<div class="jb-output-code jb-render">
+
+<!-- start embedded style -->
+
+<!-- end embedded style -->
+<div class="jb-output jb-render">
+
+<span id="id-b15832b3-d694-4df6-8671-db609d464c52" ><span id="id-b15832b3-d694-4df6-8671-db609d464c52"><img id="img-id-b15832b3-d694-4df6-8671-db609d464c52"     src="assets/images/f1.svg"/></span>
+</span>
+
+</div><!-- end of jb-output jb-render -->
+</div><!-- end of jb-output-code jb-render -->
+
+
+</div>
+<!-- Footer -->
+
+<div class="jb-footer-left plain">
+    <span id="id-1b7ce78e-3d78-479e-a96c-485cf155564a" ><span id="id-1b7ce78e-3d78-479e-a96c-485cf155564a"><img id="img-id-1b7ce78e-3d78-479e-a96c-485cf155564a"     src="assets/images/logo.png"/></span>
+</span>
+
+</div>
+<div class="jb-footer-right plain">
+    <span id="id-34e00039-126f-4382-821d-044bb06e069c" ><span id="id-34e00039-126f-4382-821d-044bb06e069c"><img id="img-id-34e00039-126f-4382-821d-044bb06e069c" width="162" height="138"   src="assets/images/robbi.png"/></span>
+</span>
+
+</div>
+
+<aside class="notes">
+
+</aside>
+
+
+
+</section>
+<section id="slide_00010_frag_00001" data-state="slide_00010_frag_00001">
+
+
+<!-- Header -->
+  
+
+<!-- Background -->
+
+
+<!-- Slide -->
+<div class="jb-slide">
+
+<div class="jb-output-code jb-render">
+
+<!-- start embedded style -->
+
+<!-- end embedded style -->
+<div class="jb-output jb-render">
+
+<h1>Playing Strategy</h1>
+
+<div class="jb-text">
+<p>The board is perfectly balanced if and only if the center of mass of all
+the pieces is above the pivot point</p>
+<p>If the center of mass is not above, then it will create a torque at the 
+pivot point, which will rotate the board</p>
+<p>Torque is counteracted by rotated around the corkball</p>
+<p>If friction of the pieces on the board is less than drag of gravity, then
+the pieces will start to slide and the board will topple</p>
+</div>
+
+</div><!-- end of jb-output jb-render -->
+</div><!-- end of jb-output-code jb-render -->
+
+
+</div>
+<!-- Footer -->
+
+<div class="jb-footer-left plain">
+    <span id="id-ddb861b6-e8ff-4469-8471-eaa06a1f4aa1" ><span id="id-ddb861b6-e8ff-4469-8471-eaa06a1f4aa1"><img id="img-id-ddb861b6-e8ff-4469-8471-eaa06a1f4aa1"     src="assets/images/logo.png"/></span>
+</span>
+
+</div>
+<div class="jb-footer-right plain">
+    <span id="id-45d91b34-9b3e-43cb-9d96-28f66d152291" ><span id="id-45d91b34-9b3e-43cb-9d96-28f66d152291"><img id="img-id-45d91b34-9b3e-43cb-9d96-28f66d152291" width="162" height="138"   src="assets/images/robbi.png"/></span>
+</span>
+
+</div>
+
+<aside class="notes">
+
+</aside>
+
+
+
+</section>
+<section id="slide_00011_frag_00001" data-state="slide_00011_frag_00001">
+
+
+<!-- Header -->
+  
+
+<!-- Background -->
+
+
+<!-- Slide -->
+<div class="jb-slide">
+
+<div class="jb-output-code jb-render">
+
+<!-- start embedded style -->
+
+<!-- end embedded style -->
+<div class="jb-output jb-render">
+
+<h1>Strategy</h1>
+
+<div class="jb-text">
+<p>Move center of mass towards the pivot point</p>
+<p>Only move allowed is to remove a pieces</p>
+<p>So, we must remove the pieces so that the center of mass of the remaining pieces is as 
+close as possible to the pivot point</p>
+<p>Greedy strategy is sufficient: Always remove the pieces which results in the center of mass
+being as close as possible to the pivot point</p>
+</div>
+
+</div><!-- end of jb-output jb-render -->
+</div><!-- end of jb-output-code jb-render -->
+
+
+</div>
+<!-- Footer -->
+
+<div class="jb-footer-left plain">
+    <span id="id-c732716a-268b-41a2-8acc-f76fa2bea2e0" ><span id="id-c732716a-268b-41a2-8acc-f76fa2bea2e0"><img id="img-id-c732716a-268b-41a2-8acc-f76fa2bea2e0"     src="assets/images/logo.png"/></span>
+</span>
+
+</div>
+<div class="jb-footer-right plain">
+    <span id="id-9fffb446-8ecb-4b6b-baa5-404275d6c21f" ><span id="id-9fffb446-8ecb-4b6b-baa5-404275d6c21f"><img id="img-id-9fffb446-8ecb-4b6b-baa5-404275d6c21f" width="162" height="138"   src="assets/images/robbi.png"/></span>
+</span>
+
+</div>
+
+<aside class="notes">
+
+</aside>
+
+
+
+</section>
+<section id="slide_00012_frag_00001" data-state="slide_00012_frag_00001">
+
+
+<!-- Header -->
+  
+
+<!-- Background -->
+
+
+<!-- Slide -->
+<div class="jb-slide">
+
+<div class="jb-output-code jb-render">
+
+<!-- start embedded style -->
+
+<!-- end embedded style -->
+<div class="jb-output jb-render">
+
+<h1>Human Strategies (Mentioned in the Video)</h1>
+
+<div class="jb-text">
+<p>Pick a piece from the side tilted down</p>
+<p>Pick pieces that are close the center/pivot point</p>
+<p>These make sense if we consider the center of mass of the system</p>
+</div>
+
+</div><!-- end of jb-output jb-render -->
+</div><!-- end of jb-output-code jb-render -->
+
+
+</div>
+<!-- Footer -->
+
+<div class="jb-footer-left plain">
+    <span id="id-1462c4b1-b64b-4d59-8a62-1e67dbd9044f" ><span id="id-1462c4b1-b64b-4d59-8a62-1e67dbd9044f"><img id="img-id-1462c4b1-b64b-4d59-8a62-1e67dbd9044f"     src="assets/images/logo.png"/></span>
+</span>
+
+</div>
+<div class="jb-footer-right plain">
+    <span id="id-a5de5806-f685-4ace-b051-a6a9f8d9203d" ><span id="id-a5de5806-f685-4ace-b051-a6a9f8d9203d"><img id="img-id-a5de5806-f685-4ace-b051-a6a9f8d9203d" width="162" height="138"   src="assets/images/robbi.png"/></span>
+</span>
+
+</div>
+
+<aside class="notes">
+
+</aside>
+
+
+
+</section>
+<section id="slide_00013_frag_00001" data-state="slide_00013_frag_00001">
+
+
+<!-- Header -->
+  
+
+<!-- Background -->
+
+
+<!-- Slide -->
+<div class="jb-slide">
+
+<div class="jb-output-code jb-render">
+
+<!-- start embedded style -->
+
+<!-- end embedded style -->
+<div class="jb-output jb-render">
+
+<h1>Center of Mass</h1>
+
+<div class="jb-text">
+<p>Center of Mass of a set of particles (point masses) is the point that if we apply a force,
+we can move the entire set of particles without them tilting</p>
+<p>As a kid you will have experimented with the center of mass if you tried to balance
+a mobile phone on your finger</p>
+<p>The center of mass is the point where there is no resulting torque from the point masses, that is,
+the sum of the moments of the point masses is 0 at the center of mass</p>
+</div>
+
+</div><!-- end of jb-output jb-render -->
+</div><!-- end of jb-output-code jb-render -->
+
+
+</div>
+<!-- Footer -->
+
+<div class="jb-footer-left plain">
+    <span id="id-17c3bf5b-e957-4b55-aeaa-2e43618dd425" ><span id="id-17c3bf5b-e957-4b55-aeaa-2e43618dd425"><img id="img-id-17c3bf5b-e957-4b55-aeaa-2e43618dd425"     src="assets/images/logo.png"/></span>
+</span>
+
+</div>
+<div class="jb-footer-right plain">
+    <span id="id-902511c0-31d9-44d6-886d-a01842c2456e" ><span id="id-902511c0-31d9-44d6-886d-a01842c2456e"><img id="img-id-902511c0-31d9-44d6-886d-a01842c2456e" width="162" height="138"   src="assets/images/robbi.png"/></span>
+</span>
+
+</div>
+
+<aside class="notes">
+
+</aside>
+
+
+
+</section>
+<section id="slide_00014_frag_00001" data-state="slide_00014_frag_00001">
+
+
+<!-- Header -->
+  
+
+<!-- Background -->
+
+
+<!-- Slide -->
+<div class="jb-slide">
+
+<div class="jb-output-code jb-render">
+
+<!-- start embedded style -->
+
+<!-- end embedded style -->
+<div class="jb-output jb-render">
+
+<div class="jb-text">
+<p>Moment: A mass \(m\) at position \(x\) generates a torque at the pivot point \(P\) that is equal to the mass \(m\) 
+multiplied by the distance between the pivot point \(p\) and the position \(x\) of the mass \(m\)
+</div>
+
+</div><!-- end of jb-output jb-render -->
+</div><!-- end of jb-output-code jb-render -->
+
+
+</div>
+<!-- Footer -->
+
+<div class="jb-footer-left plain">
+    <span id="id-53a39815-b6ce-4184-a520-194b3af04c33" ><span id="id-53a39815-b6ce-4184-a520-194b3af04c33"><img id="img-id-53a39815-b6ce-4184-a520-194b3af04c33"     src="assets/images/logo.png"/></span>
+</span>
+
+</div>
+<div class="jb-footer-right plain">
+    <span id="id-cfa1d96f-1e5a-4b53-84fa-9282f1248a4a" ><span id="id-cfa1d96f-1e5a-4b53-84fa-9282f1248a4a"><img id="img-id-cfa1d96f-1e5a-4b53-84fa-9282f1248a4a" width="162" height="138"   src="assets/images/robbi.png"/></span>
+</span>
+
+</div>
+
+<aside class="notes">
+
+</aside>
+
+
+
+</section>
+<section id="slide_00015_frag_00001" data-state="slide_00015_frag_00001">
+
+
+<!-- Header -->
+  
+
+<!-- Background -->
+
+
+<!-- Slide -->
+<div class="jb-slide">
+
+<div class="jb-output-code jb-render">
+
+<!-- start embedded style -->
+
+<!-- end embedded style -->
+<div class="jb-output jb-render">
+
+<h1>Center of Mass</h1>
+<div class="jb-text">
+<p>Center of Mass: Point where the sum of all the moments of all particles \( (p_1, p_2, p_n) \) is 0</p>
+<p>
+\[
+    \sum_{i=1}^{n} m_i * ( x_{com} - x_{i} ) = 0
+\]
+</p>
+
+</div>
+
+</div><!-- end of jb-output jb-render -->
+</div><!-- end of jb-output-code jb-render -->
+
+
+</div>
+<!-- Footer -->
+
+<div class="jb-footer-left plain">
+    <span id="id-608196f7-1b7d-48e4-9d5d-f677e3dff1d2" ><span id="id-608196f7-1b7d-48e4-9d5d-f677e3dff1d2"><img id="img-id-608196f7-1b7d-48e4-9d5d-f677e3dff1d2"     src="assets/images/logo.png"/></span>
+</span>
+
+</div>
+<div class="jb-footer-right plain">
+    <span id="id-75361743-e935-472d-8034-a803089ce2c4" ><span id="id-75361743-e935-472d-8034-a803089ce2c4"><img id="img-id-75361743-e935-472d-8034-a803089ce2c4" width="162" height="138"   src="assets/images/robbi.png"/></span>
+</span>
+
+</div>
+
+<aside class="notes">
+
+</aside>
+
+
+
+</section>
+<section id="slide_00016_frag_00001" data-state="slide_00016_frag_00001">
+
+
+<!-- Header -->
+  
+
+<!-- Background -->
+
+
+<!-- Slide -->
+<div class="jb-slide">
+
+<div class="jb-output-code jb-render">
+
+<!-- start embedded style -->
+
+<!-- end embedded style -->
+<div class="jb-output jb-render">
+
+<h1>Center of Mass</h1>
+<div class="jb-text">
+<p>Solve for \( x_{com} \)</p>
+<p>
+\[
+    \sum_{i=1}^{n} m_i * ( x_{com} - x_{i} ) = 0 \\
+  \sum_{i=1}^{n} m_i * x_{com} -  \sum_{i=1}^{n} m_i x_{i} = 0 \\ 
+  x_{com} \sum_{i=1}^{n} m_i -  \sum_{i=1}^{n} m_i x_{i} = 0 \\ 
+\]
+</p>
+<p>
+Equation for CoM:
+\[
+  x_{com}  = \frac{ \sum_{i=1}^{n} m_i x_{i} }{\sum_{i=1}^{n} m_i }  
+\]
+</p>
+</div>
+
+</div><!-- end of jb-output jb-render -->
+</div><!-- end of jb-output-code jb-render -->
+
+
+</div>
+<!-- Footer -->
+
+<div class="jb-footer-left plain">
+    <span id="id-d9c6c36c-ca1a-44bc-bcc3-a0c04bfbceb6" ><span id="id-d9c6c36c-ca1a-44bc-bcc3-a0c04bfbceb6"><img id="img-id-d9c6c36c-ca1a-44bc-bcc3-a0c04bfbceb6"     src="assets/images/logo.png"/></span>
+</span>
+
+</div>
+<div class="jb-footer-right plain">
+    <span id="id-24fe1fe4-12a4-47f0-a8c8-270b87c33615" ><span id="id-24fe1fe4-12a4-47f0-a8c8-270b87c33615"><img id="img-id-24fe1fe4-12a4-47f0-a8c8-270b87c33615" width="162" height="138"   src="assets/images/robbi.png"/></span>
+</span>
+
+</div>
+
+<aside class="notes">
+
+</aside>
+
+
+
+</section>
+<section id="slide_00017_frag_00001" data-state="slide_00017_frag_00001">
+
+
+<!-- Header -->
+  
+
+<!-- Background -->
+
+
+<!-- Slide -->
+<div class="jb-slide">
+<div class="jb-input jb-render jb-code" style="text-align:center">
+
+<!-- start embedded style -->
+
+<!-- end embedded style -->
+<div class="jb-input-code jb-render">
+<div class="highlight" style="background: #f8f8f8; color:#101010;display=inline-block;"><pre style="line-height: 125%;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">calc_com</span>( pieces ):
+  mx <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sum( [ p<span style="color: #666666">.</span>weight <span style="color: #666666">*</span> p<span style="color: #666666">.</span>pos <span style="color: #008000; font-weight: bold">for</span> p <span style="color: #AA22FF; font-weight: bold">in</span> pieces ] )
+  m <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sum( [ p<span style="color: #666666">.</span>weight <span style="color: #008000; font-weight: bold">for</span> p <span style="color: #AA22FF; font-weight: bold">in</span> pieces ] )  
+  <span style="color: #008000; font-weight: bold">return</span> mx<span style="color: #666666">/</span>m
+
+com <span style="color: #666666">=</span> calc_com( pieces )
+<span style="color: #008000">print</span>( com ) 
+</pre></div>
+
+</div><!-- end of jb-input-code jb-render -->
+
+</div>
+<div class="jb-print jb-render">
+<div class="jb-output jb-render code" style="text-align:center">
+<div class="jb-stdout code" style="display:inline-block; width:90%">
+<pre >
+0.0041666666666666475
+</pre>
+</div>
+</div>
+
+</div><!-- end of jb-print jb-render -->
+
+</div>
+<!-- Footer -->
+
+<div class="jb-footer-left plain">
+    <span id="id-a756cef2-1ab6-4fd9-b97d-4b44513b07dc" ><span id="id-a756cef2-1ab6-4fd9-b97d-4b44513b07dc"><img id="img-id-a756cef2-1ab6-4fd9-b97d-4b44513b07dc"     src="assets/images/logo.png"/></span>
+</span>
+
+</div>
+<div class="jb-footer-right plain">
+    <span id="id-a9ce2536-7f6c-4d79-9879-53abbe35bf0f" ><span id="id-a9ce2536-7f6c-4d79-9879-53abbe35bf0f"><img id="img-id-a9ce2536-7f6c-4d79-9879-53abbe35bf0f" width="162" height="138"   src="assets/images/robbi.png"/></span>
+</span>
+
+</div>
+
+<aside class="notes">
+
+</aside>
+
+
+
+</section>
+<section id="slide_00018_frag_00001" data-state="slide_00018_frag_00001">
+
+
+<!-- Header -->
+  
+
+<!-- Background -->
+
+
+<!-- Slide -->
+<div class="jb-slide">
+<div class="jb-input jb-render jb-code" style="text-align:center">
+
+<!-- start embedded style -->
+
+<!-- end embedded style -->
+<div class="jb-input-code jb-render">
+<div class="highlight" style="background: #f8f8f8; color:#101010;display=inline-block;"><pre style="line-height: 125%;"><span></span>fig <span style="color: #666666">=</span> plt<span style="color: #666666">.</span>figure()
+ax1 <span style="color: #666666">=</span> fig<span style="color: #666666">.</span>add_subplot( <span style="color: #666666">1</span>,<span style="color: #666666">1</span>,<span style="color: #666666">1</span> )
+ax1<span style="color: #666666">.</span>set_xlim((<span style="color: #666666">-1</span>,<span style="color: #666666">1</span>))
+ax1<span style="color: #666666">.</span>set_ylim((<span style="color: #666666">-1</span>, <span style="color: #666666">1</span>))
+
+field_size<span style="color: #666666">=1.8</span>
+pole_width, pole_height <span style="color: #666666">=</span> <span style="color: #666666">0.1</span>, <span style="color: #666666">0.3</span> 
+
+pieces <span style="color: #666666">=</span> [ Piece_Rectangle( [random<span style="color: #666666">.</span>randint(<span style="color: #666666">-9</span>,<span style="color: #666666">7</span>)<span style="color: #666666">/10</span>], random<span style="color: #666666">.</span>randint(<span style="color: #666666">5</span>, <span style="color: #666666">15</span>)<span style="color: #666666">/10</span>, [ random<span style="color: #666666">.</span>randint(<span style="color: #666666">10</span>,<span style="color: #666666">20</span>)<span style="color: #666666">/100</span>, random<span style="color: #666666">.</span>randint(<span style="color: #666666">10</span>,<span style="color: #666666">20</span>)<span style="color: #666666">/100</span> ] ) <span style="color: #008000; font-weight: bold">for</span> r <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">10</span>) ]
+
+<span style="color: #008000; font-weight: bold">for</span> p <span style="color: #AA22FF; font-weight: bold">in</span> pieces:
+  p<span style="color: #666666">.</span>draw_2d( ax1 )
+
+ax1<span style="color: #666666">.</span>plot( [<span style="color: #666666">-</span>field_size<span style="color: #666666">/2</span>, field_size<span style="color: #666666">/2</span>],[<span style="color: #666666">0</span>,<span style="color: #666666">0</span>], <span style="color: #BA2121">&#39;-&#39;</span>, color<span style="color: #666666">=</span><span style="color: #BA2121">&#39;black&#39;</span>, linewidth<span style="color: #666666">=3</span> )
+ax1<span style="color: #666666">.</span>plot( [ <span style="color: #666666">0</span>, <span style="color: #666666">-</span>pole_width, pole_width, <span style="color: #666666">0</span> ], [ <span style="color: #666666">0</span>, <span style="color: #666666">-</span>pole_height, <span style="color: #666666">-</span>pole_height, <span style="color: #666666">0</span>], <span style="color: #BA2121">&#39;-&#39;</span>, color<span style="color: #666666">=</span><span style="color: #BA2121">&#39;green&#39;</span>, linewidth<span style="color: #666666">=3</span> )
+
+ax1<span style="color: #666666">.</span>plot( [com, com], [<span style="color: #666666">-</span>pole_height,<span style="color: #666666">0</span>], <span style="color: #BA2121">&#39;--&#39;</span>, color<span style="color: #666666">=</span><span style="color: #BA2121">&#39;blue&#39;</span>, linewidth<span style="color: #666666">=2</span>)
+ax1<span style="color: #666666">.</span>text( com<span style="color: #666666">+0.1</span>, <span style="color: #666666">-</span>pole_height<span style="color: #666666">/2</span>, <span style="color: #BA2121">&quot;Center of Mass&quot;</span>, color<span style="color: #666666">=</span><span style="color: #BA2121">&quot;blue&quot;</span> )
+f2 <span style="color: #666666">=</span> addJBFigure( <span style="color: #BA2121">&quot;f2&quot;</span>, <span style="color: #666666">0</span>, <span style="color: #666666">0</span>, fig )
+plt<span style="color: #666666">.</span>close()
+</pre></div>
+
+</div><!-- end of jb-input-code jb-render -->
+
+</div>
+
+</div>
+<!-- Footer -->
+
+<div class="jb-footer-left plain">
+    <span id="id-79889e74-4dc8-415e-9712-989c2c33fc1a" ><span id="id-79889e74-4dc8-415e-9712-989c2c33fc1a"><img id="img-id-79889e74-4dc8-415e-9712-989c2c33fc1a"     src="assets/images/logo.png"/></span>
+</span>
+
+</div>
+<div class="jb-footer-right plain">
+    <span id="id-d862608c-309e-4a19-abd5-362749a1ba1f" ><span id="id-d862608c-309e-4a19-abd5-362749a1ba1f"><img id="img-id-d862608c-309e-4a19-abd5-362749a1ba1f" width="162" height="138"   src="assets/images/robbi.png"/></span>
+</span>
+
+</div>
+
+<aside class="notes">
+
+</aside>
+
+
+
+</section>
+<section id="slide_00019_frag_00001" data-state="slide_00019_frag_00001">
+
+
+<!-- Header -->
+  
+
+<!-- Background -->
+
+
+<!-- Slide -->
+<div class="jb-slide">
+
+<div class="jb-output-code jb-render">
+
+<!-- start embedded style -->
+
+<!-- end embedded style -->
+<div class="jb-output jb-render">
+
+<span id="id-ca974c57-07dc-43e3-88f8-59c134f287ef" ><span id="id-ca974c57-07dc-43e3-88f8-59c134f287ef"><img id="img-id-ca974c57-07dc-43e3-88f8-59c134f287ef"     src="assets/images/f2.svg"/></span>
+</span>
+
+</div><!-- end of jb-output jb-render -->
+</div><!-- end of jb-output-code jb-render -->
+
+
+</div>
+<!-- Footer -->
+
+<div class="jb-footer-left plain">
+    <span id="id-0096c9df-776a-47a7-bd14-64872849ed22" ><span id="id-0096c9df-776a-47a7-bd14-64872849ed22"><img id="img-id-0096c9df-776a-47a7-bd14-64872849ed22"     src="assets/images/logo.png"/></span>
+</span>
+
+</div>
+<div class="jb-footer-right plain">
+    <span id="id-da62f3f6-92f2-455b-9e3a-9bd4ba764c4d" ><span id="id-da62f3f6-92f2-455b-9e3a-9bd4ba764c4d"><img id="img-id-da62f3f6-92f2-455b-9e3a-9bd4ba764c4d" width="162" height="138"   src="assets/images/robbi.png"/></span>
+</span>
+
+</div>
+
+<aside class="notes">
+
+</aside>
+
+
+
+</section>
+<section id="slide_00020_frag_00001" data-state="slide_00020_frag_00001">
+
+
+<!-- Header -->
+  
+
+<!-- Background -->
+
+
+<!-- Slide -->
+<div class="jb-slide">
+<div class="jb-input jb-render jb-code" style="text-align:center">
+
+<!-- start embedded style -->
+
+<!-- end embedded style -->
+<div class="jb-input-code jb-render">
+<div class="highlight" style="background: #f8f8f8; color:#101010;display=inline-block;"><pre style="line-height: 125%;"><span></span>o_pieces <span style="color: #666666">=</span> pieces<span style="color: #666666">.</span>copy()
+
+<span style="color: #008000; font-weight: bold">for</span> play <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>( <span style="color: #008000">len</span>(pieces ) ):
+  <span style="color: #008000">print</span>( <span style="color: #BA2121">f&quot;Round </span><span style="color: #A45A77; font-weight: bold">{</span>play<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">: </span><span style="color: #A45A77; font-weight: bold">{</span><span style="color: #008000">len</span>(pieces)<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121"> pieces left&quot;</span>)
+  <span style="color: #008000">min</span> <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">None</span>
+  minIndex <span style="color: #666666">=</span> <span style="color: #666666">-1</span>
+  <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(pieces)):
+    tmp_pieces <span style="color: #666666">=</span> pieces[<span style="color: #666666">0</span>:i] <span style="color: #666666">+</span> pieces[i<span style="color: #666666">+1</span>:]
+    com <span style="color: #666666">=</span> calc_com( tmp_pieces )
+    <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">min</span> <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #008000; font-weight: bold">None</span> <span style="color: #AA22FF; font-weight: bold">or</span> ( <span style="color: #008000">abs</span>(<span style="color: #008000">min</span>) <span style="color: #666666">&gt;</span> <span style="color: #008000">abs</span>(com) ):
+      min_index <span style="color: #666666">=</span> i
+      <span style="color: #008000">min</span> <span style="color: #666666">=</span> com
+
+  <span style="color: #008000">print</span>( <span style="color: #BA2121">f&quot;Remove piece </span><span style="color: #A45A77; font-weight: bold">{</span>min_index<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121"> </span><span style="color: #A45A77; font-weight: bold">{</span>pieces[min_index]<span style="color: #666666">.</span>weight<span style="color: #A45A77; font-weight: bold">:</span><span style="color: #BA2121">.2f</span><span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">, new com </span><span style="color: #A45A77; font-weight: bold">{</span><span style="color: #008000">min</span><span style="color: #A45A77; font-weight: bold">:</span><span style="color: #BA2121">.2f</span><span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">&quot;</span> )
+  pieces <span style="color: #666666">=</span> pieces[<span style="color: #666666">0</span>:min_index] <span style="color: #666666">+</span> pieces[min_index<span style="color: #666666">+1</span>:]
+</pre></div>
+
+</div><!-- end of jb-input-code jb-render -->
+
+</div>
+<div class="jb-print jb-render">
+<div class="jb-output jb-render code" style="text-align:center">
+<div class="jb-stdout code" style="display:inline-block; width:90%">
+<pre >
+Round 0: 10 pieces left
+Remove piece 4 1.50, new com -0.18
+Round 1: 9 pieces left
+Remove piece 6 1.20, new com -0.11
+Round 2: 8 pieces left
+Remove piece 5 0.80, new com -0.03
+Round 3: 7 pieces left
+Remove piece 5 1.40, new com -0.01
+Round 4: 6 pieces left
+Remove piece 5 0.50, new com 0.01
+Round 5: 5 pieces left
+Remove piece 0 0.70, new com -0.04
+Round 6: 4 pieces left
+Remove piece 3 0.60, new com 0.12
+Round 7: 3 pieces left
+Remove piece 1 1.10, new com 0.07
+Round 8: 2 pieces left
+Remove piece 0 0.90, new com -0.40
+Round 9: 1 pieces left
+Remove piece 0 1.20, new com nan
+</pre>
+</div>
+</div>
+
+</div><!-- end of jb-print jb-render -->
+
+</div>
+<!-- Footer -->
+
+<div class="jb-footer-left plain">
+    <span id="id-60055d43-e4c4-47da-bc03-ed6b624139f2" ><span id="id-60055d43-e4c4-47da-bc03-ed6b624139f2"><img id="img-id-60055d43-e4c4-47da-bc03-ed6b624139f2"     src="assets/images/logo.png"/></span>
+</span>
+
+</div>
+<div class="jb-footer-right plain">
+    <span id="id-ff520dba-eb6c-42b6-abf5-e2c46ff5ea96" ><span id="id-ff520dba-eb6c-42b6-abf5-e2c46ff5ea96"><img id="img-id-ff520dba-eb6c-42b6-abf5-e2c46ff5ea96" width="162" height="138"   src="assets/images/robbi.png"/></span>
+</span>
+
+</div>
+
+<aside class="notes">
+
+</aside>
+
+
+
+</section>
+<section id="slide_00021_frag_00001" data-state="slide_00021_frag_00001">
+
+
+<!-- Header -->
+  
+
+<!-- Background -->
+
+
+<!-- Slide -->
+<div class="jb-slide">
+
+<div class="jb-output-code jb-render">
+
+<!-- start embedded style -->
+
+<!-- end embedded style -->
+<div class="jb-output jb-render">
+
+<h1>Vision for Bamboleo</h1>
+
+<div class="jb-text">
+<p>Recognize the playing field</p>
+<p>Recognize the pieces (type, position)</p>
+<p>Find the piece which minimizes the offset of the center of mass from the pivot point</p>
+<p>Send this to the motion planner and grip planner</p>
+<p>Detect tilt angle of the playing field</p>
+</div>
+
+</div><!-- end of jb-output jb-render -->
+</div><!-- end of jb-output-code jb-render -->
+
+
+</div>
+<!-- Footer -->
+
+<div class="jb-footer-left plain">
+    <span id="id-a06e8b20-5756-4ce3-8e7c-d1fcbafc4c52" ><span id="id-a06e8b20-5756-4ce3-8e7c-d1fcbafc4c52"><img id="img-id-a06e8b20-5756-4ce3-8e7c-d1fcbafc4c52"     src="assets/images/logo.png"/></span>
+</span>
+
+</div>
+<div class="jb-footer-right plain">
+    <span id="id-7723a04b-e806-4ad0-afc7-5f750cc7d9b6" ><span id="id-7723a04b-e806-4ad0-afc7-5f750cc7d9b6"><img id="img-id-7723a04b-e806-4ad0-afc7-5f750cc7d9b6" width="162" height="138"   src="assets/images/robbi.png"/></span>
+</span>
+
+</div>
+
+<aside class="notes">
+
+</aside>
+
+
+
+</section>
+        </div>
+        </div>
+
+        <script src="js/reveal.js"></script>
+
+        <script>
+            // More info about config & dependencies:
+            // - https://github.com/hakimel/reveal.js#configuration
+            // - https://github.com/hakimel/reveal.js#dependencies
+            Reveal.initialize({
+                math: {
+                    mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+                    config: 'TeX-AMS_HTML-full',  // See http://docs.mathjax.org/en/latest/config-files.html
+                    // tex2jax: {
+                    //     inlineMath: [['$', '$'], ['\(', '\)']],
+                    //     displayMath: [['$$', '$$'], ['\[', '\]']],
+                    //     processEscapes: true,
+                    //     processEnvironments: true,
+                    //     skipTags: ['script', 'noscript', 'style', 'textarea', 'code', 'pre'],
+                    //     displayAlign: 'center',
+                    // }                
+                },
+                dependencies: [
+                    { src: 'plugin/markdown/marked.js' },
+                    { src: 'plugin/markdown/markdown.js' },
+                    { src: 'plugin/notes/notes.js', async: true },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/math/math.js', async: true }
+                ]
+            });
+        </script>
+
+        <script>
+            <!-- Assets -->
+var assets = {
+"robbi" : new JBImage( "robbi", "12677", "162", "138", null, null, "assets/images/robbi", "png" ),
+"logo" : new JBImage( "logo", "12033", "0", "0", null, null, "assets/images/logo", "png" ),
+"fira-logo-1" : new JBImage( "fira-logo-1", "93836", "0", "0", null, null, "assets/images/FIRA-logo-1", "png" ),
+"pairLogo" : new JBImage( "pairLogo", "63051", "0", "0", null, null, "assets/images/pairLogo", "png" ),
+"b1" : new JBImage( "b1", "822633", "0", "0", "https://i.postimg.cc/L54JP39p/image.png", null, "assets/images/b1", "png" ),
+"sawyer" : new JBImage( "sawyer", "459223", "0", "0", "https://i.postimg.cc/TY7tpkdT/image.png", null, "assets/images/sawyer", "png" ),
+"f1" : new JBImage( "f1", "23371", "0", "0", null, null, "assets/images/f1", "svg" ),
+"f2" : new JBImage( "f2", "28815", "0", "0", null, null, "assets/images/f2", "svg" ) 
+};
+var assetInstances = {
+    "id-b9bc18ec-c164-4ef3-ab6c-3dd82d5fb206": assets["robbi"],
+    "id-b9a39912-58f1-4afa-8260-ed652bd3bf2a": assets["robbi"],
+    "id-ecd2121f-3de6-4b95-b841-52d141ac048f": assets["robbi"],
+    "id-5760800d-aaaf-4c6a-a614-a12230e8e71e": assets["robbi"],
+    "id-cc25b32e-eb1c-432b-8702-721d9ffa9609": assets["robbi"],
+    "id-5347cf05-b239-45e1-9f1a-b28b95f21bdb": assets["robbi"],
+    "id-eb3e6d46-6d1b-4ebb-9f24-f925aa9b2000": assets["robbi"],
+    "id-34e00039-126f-4382-821d-044bb06e069c": assets["robbi"],
+    "id-45d91b34-9b3e-43cb-9d96-28f66d152291": assets["robbi"],
+    "id-9fffb446-8ecb-4b6b-baa5-404275d6c21f": assets["robbi"],
+    "id-a5de5806-f685-4ace-b051-a6a9f8d9203d": assets["robbi"],
+    "id-902511c0-31d9-44d6-886d-a01842c2456e": assets["robbi"],
+    "id-cfa1d96f-1e5a-4b53-84fa-9282f1248a4a": assets["robbi"],
+    "id-75361743-e935-472d-8034-a803089ce2c4": assets["robbi"],
+    "id-24fe1fe4-12a4-47f0-a8c8-270b87c33615": assets["robbi"],
+    "id-a9ce2536-7f6c-4d79-9879-53abbe35bf0f": assets["robbi"],
+    "id-d862608c-309e-4a19-abd5-362749a1ba1f": assets["robbi"],
+    "id-da62f3f6-92f2-455b-9e3a-9bd4ba764c4d": assets["robbi"],
+    "id-ff520dba-eb6c-42b6-abf5-e2c46ff5ea96": assets["robbi"],
+    "id-7723a04b-e806-4ad0-afc7-5f750cc7d9b6": assets["robbi"],
+    "id-b7318ea4-cfe9-466c-bbd6-47302ea5a1df": assets["logo"],
+    "id-439b1000-e3ef-409a-9c1e-b443f995614d": assets["logo"],
+    "id-dda95327-8508-4da1-952f-f96a1b836e79": assets["logo"],
+    "id-2b23376e-9add-4c72-b9dc-72cca379998f": assets["logo"],
+    "id-fd3414ea-c2a1-4bc1-9fb9-28ccd0d73b5b": assets["logo"],
+    "id-88b974d7-9e6a-41e5-9475-91324c391418": assets["logo"],
+    "id-be5bbd02-ac21-4bb1-9bba-45d197932e05": assets["logo"],
+    "id-1b7ce78e-3d78-479e-a96c-485cf155564a": assets["logo"],
+    "id-ddb861b6-e8ff-4469-8471-eaa06a1f4aa1": assets["logo"],
+    "id-c732716a-268b-41a2-8acc-f76fa2bea2e0": assets["logo"],
+    "id-1462c4b1-b64b-4d59-8a62-1e67dbd9044f": assets["logo"],
+    "id-17c3bf5b-e957-4b55-aeaa-2e43618dd425": assets["logo"],
+    "id-53a39815-b6ce-4184-a520-194b3af04c33": assets["logo"],
+    "id-608196f7-1b7d-48e4-9d5d-f677e3dff1d2": assets["logo"],
+    "id-d9c6c36c-ca1a-44bc-bcc3-a0c04bfbceb6": assets["logo"],
+    "id-a756cef2-1ab6-4fd9-b97d-4b44513b07dc": assets["logo"],
+    "id-79889e74-4dc8-415e-9712-989c2c33fc1a": assets["logo"],
+    "id-0096c9df-776a-47a7-bd14-64872849ed22": assets["logo"],
+    "id-60055d43-e4c4-47da-bc03-ed6b624139f2": assets["logo"],
+    "id-a06e8b20-5756-4ce3-8e7c-d1fcbafc4c52": assets["logo"],
+    "id-d32fcd7d-359d-4f69-a7cd-f48ff530fafb": assets["b1"],
+    "id-ccbca1c5-deec-4186-af18-6ba3b093c700": assets["sawyer"],
+    "id-b15832b3-d694-4df6-8671-db609d464c52": assets["f1"],
+    "id-ca974c57-07dc-43e3-88f8-59c134f287ef": assets["f2"]
+};
+<!-- End of Assets -->
+
+            convertURLs(assetInstances, "smart-path");
+        </script>
+        <script>
+            <!-- Characters -->
+var characters =
+{};
+<!-- End of Characters -->
+
+        </script>
+    </body>
+</html>
